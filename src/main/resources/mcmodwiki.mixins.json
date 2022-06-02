@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "nova.committee.mcmodwiki.init.mixins",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+  ],
+  "client": [
+    "AbstractContainerScreenAccessor",
+    "KeyBoardHandlerMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

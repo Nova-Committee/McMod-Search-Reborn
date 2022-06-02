@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "id": "mcmodwiki",
+  "version": "${version}",
+  "name": "McmodWiki",
+  "description": "",
+  "authors": [
+    "cnlimiter"
+  ],
+  "contact": {},
+  "license": "AGPL-3.0",
+  "icon": "logo.jpg",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "nova.committee.mcmodwiki.McmodwikiClient"
+    ]
+  },
+  "mixins": [
+    "mcmodwiki.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.14.0",
+    "fabric": "*",
+    "minecraft": "1.18.2"
+  }
+}
