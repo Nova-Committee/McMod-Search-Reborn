@@ -1,6 +1,7 @@
 package nova.committee.mcmodwiki.core;
 
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.registries.ForgeRegistries;
 import nova.committee.mcmodwiki.Static;
 import org.apache.commons.io.IOUtils;
 
@@ -25,8 +26,8 @@ public class CoreService {
         // 先进行字符获取与转义
         try {
             modName = URLEncoder.encode(Objects.requireNonNull(stack.getItem().getCreatorModId(stack)), StandardCharsets.UTF_8);
-            regName = URLEncoder.encode(Objects.requireNonNull(stack.getItem().getRegistryName()).toString(), StandardCharsets.UTF_8);
-            displayName = URLEncoder.encode(stack.getDisplayName().getContents(), StandardCharsets.UTF_8);
+            regName = URLEncoder.encode(Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(stack.getItem())).toString(), StandardCharsets.UTF_8);
+            displayName = URLEncoder.encode(stack.getDisplayName().getString(), StandardCharsets.UTF_8);
         } catch (Exception e) {
             e.printStackTrace();
             return false;
@@ -75,7 +76,7 @@ public class CoreService {
                     "mozilla", "netscape"};
             String browser = null;
             for (int count = 0; count < browsers.length && browser == null; count++)
-                // 执行代码，在brower有值后跳出，
+                // 执行代码，在browser有值后跳出，
                 // 这里是如果进程创建成功了，==0是表示正常结束。
                 if (Runtime.getRuntime()
                         .exec(new String[]{"which", browsers[count]})

@@ -1,8 +1,6 @@
 package nova.committee.mcmodwiki.init.handler;
 
-import mezz.jei.Internal;
-import mezz.jei.api.ingredients.IIngredientType;
-import mezz.jei.recipes.FocusFactory;
+
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
@@ -13,10 +11,8 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import nova.committee.mcmodwiki.McmodWiki;
-import nova.committee.mcmodwiki.Static;
 import nova.committee.mcmodwiki.core.CoreService;
 import nova.committee.mcmodwiki.init.proxy.ClientProxy;
 
@@ -46,17 +42,17 @@ public class KeyHandler {
                 }
             }
 
-            if (ModList.get().isLoaded("jei")) {
-                if (Internal.getRuntime() != null)
-                    try {
-                        IIngredientType<ItemStack> ingredientType = Internal.getRegisteredIngredients().getIngredientType(ItemStack.class);
-                        FocusFactory factory = new FocusFactory(Internal.getRegisteredIngredients());
-                        ItemStack stack = Internal.getRuntime().getIngredientListOverlay().getIngredientUnderMouse(ingredientType);
-                        CoreService.openMcMod(stack);
-                    } catch (Throwable ex) {
-                        Static.LOGGER.warn("Unable to get JEI item.", ex);
-                    }
-            }
+//            if (ModList.get().isLoaded("jei")) {
+//                if (Internal.getRuntime() != null)
+//                    try {
+//                        IIngredientType<ItemStack> ingredientType = Internal.getRegisteredIngredients().getIngredientType(ItemStack.class);
+//                        FocusFactory factory = new FocusFactory(Internal.getRegisteredIngredients());
+//                        ItemStack stack = Internal.getRuntime().getIngredientListOverlay().getIngredientUnderMouse(ingredientType);
+//                        CoreService.openMcMod(stack);
+//                    } catch (Throwable ex) {
+//                        Static.LOGGER.warn("Unable to get JEI item.", ex);
+//                    }
+//            }
         }
     }
 

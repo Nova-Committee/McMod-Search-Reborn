@@ -21,7 +21,7 @@ apply plugin: 'org.spongepowered.mixin'
 apply plugin: "com.github.johnrengelman.shadow"
 
 group = 'nova.committee'
-version = '1.18.2-1.0.0'
+version = '1.19-1.0.0'
 
 java {
     archivesBaseName = 'MCMOD-Search-Reborn-forge'
@@ -34,7 +34,7 @@ tasks.withType(JavaCompile) {
 
 minecraft {
 
-    mappings channel: 'official', version: '1.18.2'
+    mappings channel: 'official', version: '1.19'
 
 
     runs {
@@ -169,9 +169,9 @@ dependencies {
 //    shadow 'org.jsoup:jsoup:1.14.3'
 //    shadow 'com.squareup.okhttp3:okhttp:4.9.3'
 //    shadow 'com.squareup.retrofit2:retrofit:2.9.0'
-    minecraft 'net.minecraftforge:forge:1.18.2-40.0.44'
-    compileOnly fg.deobf("mezz.jei:jei-1.18.2:9.5.5.174") // Adds JEI API as a compile dependency
-    runtimeOnly fg.deobf("mezz.jei:jei-1.18.2:9.5.5.174") // Adds the full JEI mod as a runtime dependency
+    minecraft 'net.minecraftforge:forge:1.19-41.0.5'
+    //compileOnly fg.deobf("mezz.jei:jei-1.18.2:9.5.5.174") // Adds JEI API as a compile dependency
+    //runtimeOnly fg.deobf("mezz.jei:jei-1.18.2:9.5.5.174") // Adds the full JEI mod as a runtime dependency
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 }
 
