@@ -21,7 +21,7 @@ apply plugin: 'org.spongepowered.mixin'
 apply plugin: "com.github.johnrengelman.shadow"
 
 group = 'nova.committee'
-version = '1.18.2-1.0.0'
+version = '1.18.2-1.0.1'
 
 java {
     archivesBaseName = 'MCMOD-Search-Reborn-forge'

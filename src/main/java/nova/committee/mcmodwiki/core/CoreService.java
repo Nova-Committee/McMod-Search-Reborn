@@ -4,7 +4,6 @@ import net.minecraft.world.item.ItemStack;
 import nova.committee.mcmodwiki.Static;
 import org.apache.commons.io.IOUtils;
 
-import java.lang.reflect.Method;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
@@ -20,7 +19,7 @@ public class CoreService {
 
     public static boolean openMcMod(ItemStack stack) {
         String modName, regName, displayName, url;
-        int metadata, mcModApiNum;
+        int mcModApiNum;
 
         // 先进行字符获取与转义
         try {
@@ -34,7 +33,7 @@ public class CoreService {
 
         // 访问 mcmod 百科 api，获取物品对应 id
         try {
-            URL apiUrl = new URL(String.format("https://api.mcmod.cn/getItem/?regname=%s", regName));
+            final var apiUrl = new URL(String.format("https://api.mcmod.cn/getItem/?regname=%s", regName));
             mcModApiNum = Integer.parseInt(IOUtils.readLines(apiUrl.openStream(), StandardCharsets.UTF_8).get(0));
         } catch (Exception e) {
             e.printStackTrace();
@@ -48,7 +47,6 @@ public class CoreService {
         // 打开对应连接
         try {
             browse(url);
-
         } catch (Exception e) {
             Static.LOGGER.error("打开链接失败", e);
             return false;
@@ -58,11 +56,11 @@ public class CoreService {
 
     private static void browse(String url) throws Exception {
         // 获取操作系统的名字
-        String osName = System.getProperty("os.name", "");
+        final var osName = System.getProperty("os.name", "");
         if (osName.startsWith("Mac OS")) {
             // 苹果的打开方式
-            Class<?> fileMgr = Class.forName("com.apple.eio.FileManager");
-            Method openURL = fileMgr.getDeclaredMethod("openURL",
+            final var fileMgr = Class.forName("com.apple.eio.FileManager");
+            final var openURL = fileMgr.getDeclaredMethod("openURL",
                     String.class);
             openURL.invoke(null, url);
         } else if (osName.startsWith("Windows")) {
@@ -84,7 +82,7 @@ public class CoreService {
             if (browser == null)
                 throw new Exception("Could not find web browser");
             else
-                // 这个值在上面已经成功的得到了一个进程。
+                // 这个值在上面已经成功地得到了一个进程。
                 Runtime.getRuntime().exec(new String[]{browser, url});
         }
     }
