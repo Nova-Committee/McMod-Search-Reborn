@@ -5,7 +5,6 @@ import net.minecraftforge.registries.ForgeRegistries;
 import nova.committee.mcmodwiki.Static;
 import org.apache.commons.io.IOUtils;
 
-import java.lang.reflect.Method;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
@@ -21,7 +20,7 @@ public class CoreService {
 
     public static boolean openMcMod(ItemStack stack) {
         String modName, regName, displayName, url;
-        int metadata, mcModApiNum;
+        int mcModApiNum;
 
         // 先进行字符获取与转义
         try {
@@ -35,7 +34,7 @@ public class CoreService {
 
         // 访问 mcmod 百科 api，获取物品对应 id
         try {
-            URL apiUrl = new URL(String.format("https://api.mcmod.cn/getItem/?regname=%s", regName));
+            final var apiUrl = new URL(String.format("https://api.mcmod.cn/getItem/?regname=%s", regName));
             mcModApiNum = Integer.parseInt(IOUtils.readLines(apiUrl.openStream(), StandardCharsets.UTF_8).get(0));
         } catch (Exception e) {
             e.printStackTrace();
@@ -62,8 +61,8 @@ public class CoreService {
         String osName = System.getProperty("os.name", "");
         if (osName.startsWith("Mac OS")) {
             // 苹果的打开方式
-            Class<?> fileMgr = Class.forName("com.apple.eio.FileManager");
-            Method openURL = fileMgr.getDeclaredMethod("openURL",
+            final var fileMgr = Class.forName("com.apple.eio.FileManager");
+            final var openURL = fileMgr.getDeclaredMethod("openURL",
                     String.class);
             openURL.invoke(null, url);
         } else if (osName.startsWith("Windows")) {
