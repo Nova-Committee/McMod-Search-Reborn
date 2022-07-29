@@ -2,12 +2,10 @@ buildscript {
     repositories {
         // These repositories are only for Gradle plugins, put any other repositories in the repository block further below
         maven { url = 'https://maven.minecraftforge.net' }
-        maven { url = 'https://repo.spongepowered.org/repository/maven-public/' }
         mavenCentral()
     }
     dependencies {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
-        classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
     }
 }
 
@@ -17,7 +15,6 @@ plugins {
 }
 
 apply plugin: 'net.minecraftforge.gradle'
-apply plugin: 'org.spongepowered.mixin'
 apply plugin: "com.github.johnrengelman.shadow"
 
 group = 'nova.committee'
@@ -138,11 +135,6 @@ minecraft {
     }
 }
 
-mixin {
-    add sourceSets.main, "mcmodwiki.refmap.json"
-
-    config "mcmodwiki.mixins.json"
-}
 
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
@@ -172,7 +164,6 @@ dependencies {
     minecraft 'net.minecraftforge:forge:1.18.2-40.0.44'
     compileOnly fg.deobf("mezz.jei:jei-1.18.2:9.5.5.174") // Adds JEI API as a compile dependency
     runtimeOnly fg.deobf("mezz.jei:jei-1.18.2:9.5.5.174") // Adds the full JEI mod as a runtime dependency
-    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 }
 
 shadowJar {
