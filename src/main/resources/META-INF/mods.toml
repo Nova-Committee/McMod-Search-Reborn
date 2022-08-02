@@ -8,3 +8,7 @@ displayName = "MCMOD-Search-Reborn"
 logoFile = "logo.jpg"
 authors = "cnlimiter"
 description = ""
+[[dependencies.mcmodwiki]]
+modId = "forge"
+mandatory = true
+versionRange = "[41.1.0,)"

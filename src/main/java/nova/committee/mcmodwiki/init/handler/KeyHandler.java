@@ -7,12 +7,11 @@ import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.InputEvent;
+import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
-import nova.committee.mcmodwiki.McmodWiki;
 import nova.committee.mcmodwiki.core.CoreService;
-import nova.committee.mcmodwiki.init.proxy.ClientProxy;
 
 /**
  * Description:
@@ -20,15 +19,14 @@ import nova.committee.mcmodwiki.init.proxy.ClientProxy;
  * Date: 2022/4/20 8:47
  * Version: 1.0
  */
-@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.FORGE)
+@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
 public class KeyHandler {
-
+    public static final KeyMapping searchKey = new KeyMapping("key.gui.search", 73, "key.mcmodwiki");
 
     @OnlyIn(Dist.CLIENT)
     @SubscribeEvent
-    public static void onGuiKeyPress(InputEvent.KeyInputEvent event) {
-        KeyMapping key = ((ClientProxy) McmodWiki.proxy).searchKey;
-        if (!key.isDown()) return;
+    public static void onGuiKeyPress(InputEvent.Key event) {
+        if (!searchKey.isDown()) return;
         final var screen = Minecraft.getInstance().screen;
         if (screen instanceof AbstractContainerScreen gui) {
             final var slot = gui.getSlotUnderMouse();
@@ -40,4 +38,9 @@ public class KeyHandler {
         if (ModList.get().isLoaded("jei")) JeiHandler.tryInteract();
     }
 
+    @OnlyIn(Dist.CLIENT)
+    @SubscribeEvent
+    public static void onKeyRegistry(RegisterKeyMappingsEvent event) {
+        event.register(searchKey);
+    }
 }
